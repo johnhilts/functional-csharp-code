@@ -13,11 +13,19 @@ namespace Exercises.Chapter1
             Console.WriteLine(isNegative(-1));
             Console.WriteLine(isNegative(0));
             Console.WriteLine(isNegative(1));
+            var isNegativeNumber = IsPositiveNumber.Negate();
+            Console.WriteLine(IsPositiveNumber(-1));
+            Console.WriteLine(IsPositiveNumber(-0));
+            Console.WriteLine(IsPositiveNumber(1));
+            Console.WriteLine(isNegativeNumber(-1));
+            Console.WriteLine(isNegativeNumber(0));
+            Console.WriteLine(isNegativeNumber(1));
        }
 
         // 1. Write a function that negates a given predicate: whenvever the given predicate
         // evaluates to `true`, the resulting function evaluates to `false`, and vice versa.
         private static Func<decimal, bool> IsPositive = (decimal d) => d > 0;
+        private static Func<int, bool> IsPositiveNumber = (int d) => d > 0;
 
         static Func<T, bool> Negate<T>(this Func<T, bool> pred) => t => !pred(t);
       // 2. Write a method that uses quicksort to sort a `List<int>` (return a new list,
