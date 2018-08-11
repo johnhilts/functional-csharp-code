@@ -1,14 +1,25 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace Exercises.Chapter1
 {
-   static class Exercises
+    static class Exercises
    {
-      // 1. Write a function that negates a given predicate: whenvever the given predicate
-      // evaluates to `true`, the resulting function evaluates to `false`, and vice versa.
+       public static void RunIt()
+       {
+           var isNegative = IsPositive.Negate();
+            Console.WriteLine(IsPositive(-1));
+            Console.WriteLine(IsPositive(0));
+            Console.WriteLine(IsPositive(1));
+            Console.WriteLine(isNegative(-1));
+            Console.WriteLine(isNegative(0));
+            Console.WriteLine(isNegative(1));
+       }
 
+        // 1. Write a function that negates a given predicate: whenvever the given predicate
+        // evaluates to `true`, the resulting function evaluates to `false`, and vice versa.
+        private static Func<decimal, bool> IsPositive = (decimal d) => d > 0;
+
+        static Func<T, bool> Negate<T>(this Func<T, bool> pred) => t => !pred(t);
       // 2. Write a method that uses quicksort to sort a `List<int>` (return a new list,
       // rather than sorting it in place).
 
