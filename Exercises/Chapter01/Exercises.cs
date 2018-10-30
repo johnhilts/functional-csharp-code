@@ -73,5 +73,9 @@ namespace Exercises.Chapter1
         // parameter, instead of the `IDisposable`. (This can be used to fix warnings
         // given by some code analysis tools about instantiating an `IDisposable` and
         // not disposing it.)
+        private static R Using<TDisp, R>(Func<IDisposable> d, Func<IDisposable, R> f) where TDisp : IDisposable
+        {
+            return f(d());
+        }
     }
 }
