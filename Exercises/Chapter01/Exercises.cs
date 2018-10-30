@@ -1,10 +1,12 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Exercises.Chapter1
 {
     static class Exercises
    {
-       public static void RunIt()
+       public static void RunIt1()
        {
            var isNegative = IsPositive.Negate();
             Console.WriteLine(IsPositive(-1));
@@ -28,8 +30,39 @@ namespace Exercises.Chapter1
         private static Func<int, bool> IsPositiveNumber = (int d) => d > 0;
 
         static Func<T, bool> Negate<T>(this Func<T, bool> pred) => t => !pred(t);
-      // 2. Write a method that uses quicksort to sort a `List<int>` (return a new list,
-      // rather than sorting it in place).
+        // 2. Write a method that uses quicksort to sort a `List<int>` (return a new list,
+        // rather than sorting it in place).
+        public static void RunIt2()
+        {
+            OutputRunIt2(new[] { 4, 5, 6, 1, 3, 2, 7 });
+            OutputRunIt2(new[] { 322, 126, 258, 78, 233, 90, 42 });
+            OutputRunIt2(new[] { 10, 7, 8, 9, 6 });
+        }
+        private static void OutputRunIt2(int[] l)
+        {
+            Console.WriteLine(string.Join(",", l.Select(i => i.ToString()).ToList()));
+            Console.WriteLine(string.Join(",", quicksort(l)));
+            Console.WriteLine();
+        }
+
+        private static int[] quicksort(int[] origArray)
+        {
+            if (origArray.Length <= 1)
+            {
+                return origArray;
+            }
+            else
+            {
+                var pivot = origArray[origArray.Length - 1];
+                var newArray = origArray.Take(origArray.Length - 1);
+
+                var left = newArray.Where(a => a <= pivot).Select(a => a).ToArray();
+                var right = newArray.Where(a => a > pivot).Select(a => a).ToArray();
+
+                return quicksort(left).Concat(new[] { pivot }).Concat(quicksort(right)).ToArray();
+            }
+        }
+
 
       // 3. Generalize your implementation to take a `List<T>`, and additionally a 
       // `Comparison<T>` delegate.
