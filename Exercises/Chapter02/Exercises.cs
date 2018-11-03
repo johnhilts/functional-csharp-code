@@ -10,24 +10,14 @@ namespace Exercises.Chapter2
     // 3. Unit test the pure parts
     // 4. Unit test the impure parts using the HOF-based approach
 
-    public static class Bmi
+    public static class BmiRules
     {
-        private enum WeightType { Under, Over, Healthy, }
+        public enum WeightType { Under, Over, Healthy, }
 
-        public static void CalcBmi()
-        {
-            var bmiUnits = GetBmiInput();
-            var weightType = GetWeightType(bmiUnits);
-            var weightTypeText = weightType == WeightType.Healthy ? "Healthy"
-            : weightType == WeightType.Over ? "Overweight"
-            : "Underweight";
-            Console.WriteLine($"Your weight based on BMI: {weightTypeText}");
-        }
-
-        private static WeightType GetWeightType((double Height, double Weight)bmiUnits)
+        public static WeightType GetWeightType((double Height, double Weight) bmiUnits)
         {
             var bmi = Math.Pow(bmiUnits.Weight / bmiUnits.Height, 2);
-            var weightType = 
+            var weightType =
                 bmi < 18.5 ? WeightType.Under
                     : bmi >= 25 ? WeightType.Over
                         : WeightType.Healthy;
@@ -35,7 +25,24 @@ namespace Exercises.Chapter2
             return weightType;
         }
 
-        private static (double Height, double Weight) GetBmiInput()
+        public static string GetWeightTypeText(WeightType weightType)
+        {
+            switch (weightType)
+            {
+                case WeightType.Healthy:
+                    return "Healthy";
+                case WeightType.Over:
+                    return "Overweight";
+                case WeightType.Under:
+                default:
+                    return "Underweight";
+            }
+        }
+
+    }
+    public static class BmiIo
+    {
+        public static (double Height, double Weight) GetBmiInput()
         {
             Console.Write("Enter height: ");
             var inputHeight = Console.ReadLine();
@@ -51,5 +58,17 @@ namespace Exercises.Chapter2
 
             return (height, weight);
         }
+    }
+
+    public static class BmiOrchestrator
+    {
+        public static string CalcBmi(Func<(double Height, double Weight)> getBmiInput)
+        {
+            var bmiUnits = getBmiInput();
+            var weightType = BmiRules.GetWeightType(bmiUnits);
+            var weightTypeText = BmiRules.GetWeightTypeText(weightType);
+            return ($"Your weight based on BMI: {weightTypeText}");
+        }
+
     }
 }
