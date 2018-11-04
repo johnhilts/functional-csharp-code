@@ -1,17 +1,34 @@
 ﻿using System;
 using System.Collections.Specialized;
-//using System.Configuration;
 using LaYumba.Functional;
+using LaYumba.Functional.Option;
+//using static LaYumba.Functional.F;
 
 namespace Exercises.Chapter3
 {
-   public static class Exercises
+    public class MyEnum
+    {
+        public static Option<T> Parse<T>(string dayOfWeek) where T : struct
+        {
+            var isMatch = System.Enum.TryParse(dayOfWeek, out T parsedDayOfWeek);
+            return isMatch ? F.Some<T>(parsedDayOfWeek) : F.None;
+        }
+    }
+
+    public static class Exercises
    {
       // 1 Write a generic function that takes a string and parses it as a value of an enum. It
       // should be usable as follows:
 
       // Enum.Parse<DayOfWeek>("Friday") // => Some(DayOfWeek.Friday)
       // Enum.Parse<DayOfWeek>("Freeday") // => None
+      public enum DayOfTheWeek {Sunday, Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, }
+
+        public static DayOfTheWeek ParseIt(string dayOfWeek)
+        {
+            System.Enum.TryParse(dayOfWeek, out DayOfTheWeek parsedDayOfWeek);
+            return parsedDayOfWeek;
+        }
 
       // 2 Write a Lookup function that will take an IEnumerable and a predicate, and
       // return the first element in the IEnumerable that matches the predicate, or None

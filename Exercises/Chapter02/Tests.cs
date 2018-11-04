@@ -3,7 +3,7 @@ using FluentAssertions;
 using NSpec;
 using static Exercises.Chapter2.BmiRules;
 
-namespace bcbc.Unit.Member
+namespace Tests.Chapter2
 {
     public class ChapterTwoSpec : nspec
     {
