@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Collections.Specialized;
 using LaYumba.Functional;
-using LaYumba.Functional.Option;
-//using static LaYumba.Functional.F;
+using static LaYumba.Functional.F;
 
 namespace Exercises.Chapter3
 {
@@ -11,7 +10,7 @@ namespace Exercises.Chapter3
         public static Option<T> Parse<T>(string dayOfWeek) where T : struct
         {
             var isMatch = System.Enum.TryParse(dayOfWeek, out T parsedDayOfWeek);
-            return isMatch ? F.Some<T>(parsedDayOfWeek) : F.None;
+            return isMatch ? Some<T>(parsedDayOfWeek) : None;
         }
     }
 

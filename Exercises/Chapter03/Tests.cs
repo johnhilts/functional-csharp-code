@@ -3,6 +3,7 @@ using FluentAssertions;
 using LaYumba.Functional;
 using NSpec;
 using static Exercises.Chapter3.Exercises;
+using static LaYumba.Functional.F;
 
 namespace Tests.Chapter3
 {
@@ -27,8 +28,8 @@ namespace Tests.Chapter3
 
                   new Each<string, Option<DayOfTheWeek>>
                   {
-                      {"Friday", F.Some<DayOfTheWeek>(DayOfTheWeek.Friday)},
-                      {"Freeday", F.None},
+                      {"Friday", Some<DayOfTheWeek>(DayOfTheWeek.Friday)},
+                      {"Freeday", None},
                   }.Do((given, expected) =>
                   {
                       it[$"extension should also return {expected} for {given.ToString()}"] = () =>
