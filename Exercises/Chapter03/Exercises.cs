@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Linq;
+using System.Collections.Generic;
 using System.Collections.Specialized;
 using LaYumba.Functional;
 using static LaYumba.Functional.F;
@@ -29,9 +31,15 @@ namespace Exercises.Chapter3
             return parsedDayOfWeek;
         }
 
-      // 2 Write a Lookup function that will take an IEnumerable and a predicate, and
-      // return the first element in the IEnumerable that matches the predicate, or None
-      // if no matching element is found. Write its signature in arrow notation:
+        // 2 Write a Lookup function that will take an IEnumerable and a predicate, and
+        // return the first element in the IEnumerable that matches the predicate, or None
+        // if no matching element is found. Write its signature in arrow notation:
+        public static Option<int> Lookup(this IEnumerable<int> list, Func<int, bool> predicate)
+        {
+            // Func<int, Func<int, bool>> filter = (int x) => predicate;
+            var first = list.FirstOrDefault(x => predicate(x));
+            return (first == 0) ? None : Some(first);
+        }
 
       // bool isOdd(int i) => i % 2 == 1;
       // new List<int>().Lookup(isOdd) // => None
