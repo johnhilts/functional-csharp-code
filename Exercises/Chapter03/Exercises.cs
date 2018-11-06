@@ -37,7 +37,7 @@ namespace Exercises.Chapter3
         public static Option<T> MyLookup<T>(this IEnumerable<T> list, Func<T, bool> predicate) 
         {
             var first = list.FirstOrDefault(x => predicate(x));
-            return (first.ToString() == default(T).ToString()) ? None : Some(first);
+            return (first?.ToString() == default(T)?.ToString()) ? None : Some(first);
         }
 
       // bool isOdd(int i) => i % 2 == 1;

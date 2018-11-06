@@ -70,6 +70,15 @@ namespace Tests.Chapter3
                            actual.Should().Be(expected);
                        };
                   });
+
+                it[$"given list should lookup the first element matching the predicate"] = () =>
+                 {
+                     Func<string, bool> givenPredicate = (string s) => s.ToUpper() == s;
+                     var givenList = new List<string> { "a", "B", "c" };
+                     var expected = Some("B");
+                     var actual = givenList.MyLookup(givenPredicate);
+                     actual.Should().Be(expected);
+                 };
             };
         }
 
