@@ -34,11 +34,10 @@ namespace Exercises.Chapter3
         // 2 Write a Lookup function that will take an IEnumerable and a predicate, and
         // return the first element in the IEnumerable that matches the predicate, or None
         // if no matching element is found. Write its signature in arrow notation:
-        public static Option<int> Lookup(this IEnumerable<int> list, Func<int, bool> predicate)
+        public static Option<T> MyLookup<T>(this IEnumerable<T> list, Func<T, bool> predicate) 
         {
-            // Func<int, Func<int, bool>> filter = (int x) => predicate;
             var first = list.FirstOrDefault(x => predicate(x));
-            return (first == 0) ? None : Some(first);
+            return (first.ToString() == default(T).ToString()) ? None : Some(first);
         }
 
       // bool isOdd(int i) => i % 2 == 1;

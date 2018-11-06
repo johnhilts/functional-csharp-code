@@ -64,9 +64,9 @@ namespace Tests.Chapter3
                       // 2 Write a Lookup function that will take an IEnumerable and a predicate, and
                       // return the first element in the IEnumerable that matches the predicate, or None
                       // if no matching element is found. Write its signature in arrow notation:
-                      it[$"should lookup the first element matching the predicate"] = () =>
+                      it[$"given list of {string.Join(",", given.List)} should lookup the first element matching the predicate: {expected.ToString()}"] = () =>
                        {
-                           var actual = given.List.Lookup(given.Predicate);
+                           var actual = given.List.MyLookup(given.Predicate);
                            actual.Should().Be(expected);
                        };
                   });
