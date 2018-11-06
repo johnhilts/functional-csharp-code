@@ -82,6 +82,32 @@ namespace Tests.Chapter3
             };
         }
 
+        void email_type()
+        {
+            context["smart email"] = () =>
+            {
+                new Each<string, Option<string>>
+                  {
+                      {"testATtest.com", None},
+                      {"test@test.com", Some("test@test.com")},
+                  }.Do((given, expected) =>
+                  {
+                      it[$"should only accept valid emails {given}"] = () =>
+                       {
+                           var actual = new MyEmail(given).Email;
+                           actual.Should().Be(expected);
+                       };
+                  });
+            };
+            {
+                it["solution email referenced without create throws exception"] = expect<ArgumentNullException>(() =>
+                  {
+                      Option<Solutions.Email> email = Solutions.Email.Create(null);
+                      string s = email.ToString();
+                  });
+            }
+        }
+
     }
 }
 

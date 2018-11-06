@@ -49,6 +49,16 @@ namespace Exercises.Chapter3
       // - A smart constructor
       // - Implicit conversion to string, so that it can easily be used with the typical API
       // for sending emails
+      public class MyEmail
+      {
+            public Option<string> Email { get; }
+
+            public MyEmail(string email)
+            {
+                Email = (email?.Contains("@")).GetValueOrDefault() ? Some(email) : None;
+            }
+
+        }
       
       // 4 Take a look at the extension methods defined on IEnumerable inSystem.LINQ.Enumerable.
       // Which ones could potentially return nothing, or throw some
